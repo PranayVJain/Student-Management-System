@@ -13,31 +13,16 @@
  * agreement/contract under which the program(s) have been supplied.
  * #L%
  */
-package com.sms.studentmanager.model;
+package com.sms.studentmanager.repository;
 
+import com.sms.studentmanager.model.Student;
 import java.util.List;
 
-public class Student {
+public interface StudentRepository {
 
-  private final int id;
-  private final String name;
-  private final List<Score> scores;
+  void saveStudent(Student student);
 
-  public Student(final int id, final String name, final List<Score> scores) {
-    this.id = id;
-    this.name = name;
-    this.scores = scores;
-  }
+  Student getStudent(int id);
 
-  public int getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public List<Score> getScores() {
-    return List.copyOf(scores);
-  }
+  List<Student> getAllStudents();
 }

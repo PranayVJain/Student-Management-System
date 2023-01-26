@@ -13,31 +13,18 @@
  * agreement/contract under which the program(s) have been supplied.
  * #L%
  */
-package com.sms.studentmanager.model;
+package com.sms.studentmanager.service;
 
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.springframework.stereotype.Component;
 
-public class Student {
+@Component
+public class SequenceKeyGenerator implements KeyGenerator {
 
-  private final int id;
-  private final String name;
-  private final List<Score> scores;
+  private final AtomicInteger value = new AtomicInteger(1);
 
-  public Student(final int id, final String name, final List<Score> scores) {
-    this.id = id;
-    this.name = name;
-    this.scores = scores;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public List<Score> getScores() {
-    return List.copyOf(scores);
+  @Override
+  public int getNext() {
+    return value.getAndIncrement();
   }
 }
