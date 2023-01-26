@@ -15,9 +15,13 @@
  */
 package com.sms.studentmanager.service;
 
+import com.sms.studentmanager.model.Marks;
+import com.sms.studentmanager.model.Score;
 import com.sms.studentmanager.model.Student;
+import com.sms.studentmanager.repository.ScoreRepository;
 import com.sms.studentmanager.repository.StudentRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,19 +33,33 @@ public class StudentService {
 
   private final StudentRepository studentRepository;
   private final KeyGenerator sequenceKeyGenerator;
+  private final ScoreRepository scoreRepository;
 
-  public StudentService(final StudentRepository studentRepository, final SequenceKeyGenerator sequenceKeyGenerator) {
+  public StudentService(final StudentRepository studentRepository,
+      final SequenceKeyGenerator sequenceKeyGenerator,
+      final ScoreRepository scoreRepository) {
     this.studentRepository = studentRepository;
     this.sequenceKeyGenerator = sequenceKeyGenerator;
+    this.scoreRepository = scoreRepository;
 
   }
 
   public int saveStudent(final Student student) {
     LOGGER.info("Saving student {}", student);
     final int studentId = sequenceKeyGenerator.getNext();
-    studentRepository.saveStudent(new Student(studentId, student.getName(), student.getScores()));
-    LOGGER.info("Saved student {} with id {}", student, studentId);
+    final float score = getScore(student);
+    scoreRepository.saveScore(new Score(studentId, score));
+    studentRepository.saveStudent(new Student(studentId, student.getName(), student.getMarks()));
+    LOGGER.info("Saved student {} with id {}, score {}", student, studentId, score);
     return studentId;
+  }
+
+  private float getScore(final Student student) {
+    return student
+        .getMarks()
+        .stream()
+        .map(Marks::getMarks)
+        .reduce(0f, Float::sum);
   }
 
   public Student getStudent(final int studentId) {

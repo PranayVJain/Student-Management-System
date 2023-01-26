@@ -21,12 +21,12 @@ public class Student {
 
   private final int id;
   private final String name;
-  private final List<Score> scores;
+  private final List<Marks> marks;
 
-  public Student(final int id, final String name, final List<Score> scores) {
+  public Student(final int id, final String name, final List<Marks> marks) {
     this.id = id;
     this.name = name;
-    this.scores = scores;
+    this.marks = marks;
   }
 
   public int getId() {
@@ -37,8 +37,8 @@ public class Student {
     return name;
   }
 
-  public List<Score> getScores() {
-    return List.copyOf(scores);
+  public List<Marks> getMarks() {
+    return List.copyOf(marks);
   }
 
   @Override
@@ -46,7 +46,7 @@ public class Student {
     return "Student{" +
         "id=" + id +
         ", name='" + name + '\'' +
-        ", scores=" + scores +
+        ", scores=" + marks +
         '}';
   }
 }

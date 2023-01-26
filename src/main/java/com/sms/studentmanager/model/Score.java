@@ -17,27 +17,27 @@ package com.sms.studentmanager.model;
 
 public class Score {
 
-  private float marks;
-  private Subject subject;
+  private final int studentId;
+  private final float totalScore;
 
-  public Score(final float marks, final Subject subject) {
-    this.marks = marks;
-    this.subject = subject;
+  public Score(final int studentId, final float totalScore) {
+    this.studentId = studentId;
+    this.totalScore = totalScore;
   }
 
-  public float getMarks() {
-    return marks;
+  public int getStudentId() {
+    return studentId;
   }
 
-  public Subject getSubject() {
-    return subject;
+  public float getTotalScore() {
+    return totalScore;
   }
 
   @Override
   public String toString() {
-    return "Score{" +
-        "marks=" + marks +
-        ", subject=" + subject +
+    return "StudentScore{" +
+        "studentId=" + studentId +
+        ", totalScore=" + totalScore +
         '}';
   }
 }
