@@ -1,0 +1,5 @@
+Assumptions
+
+1. The ranks of all the students will be generated after entering all the student details.
+2. The subjects are pre-defined.
+3. In memory cache to store the data is used.
