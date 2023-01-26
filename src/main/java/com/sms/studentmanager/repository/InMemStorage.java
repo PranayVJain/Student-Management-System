@@ -15,6 +15,7 @@
  */
 package com.sms.studentmanager.repository;
 
+import com.sms.studentmanager.exception.StudentNotFoundException;
 import com.sms.studentmanager.model.Student;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,11 @@ public class InMemStorage implements StudentRepository {
 
   @Override
   public Student getStudent(final int id) {
-    return inMemStore.get(id);
+    if(inMemStore.containsKey(id)){
+      return inMemStore.get(id);
+    }  else {
+      throw new StudentNotFoundException("Student with id " + id + " does not exist");
+    }
   }
 
   @Override
