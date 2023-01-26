@@ -15,38 +15,36 @@
  */
 package com.sms.studentmanager.model;
 
-import java.util.List;
+public class Rank {
 
-public class Student {
+  private final int rank;
+  private final int studentId;
+  private final float totalMarks;
 
-  private final int id;
-  private final String name;
-  private final List<Score> scores;
-
-  public Student(final int id, final String name, final List<Score> scores) {
-    this.id = id;
-    this.name = name;
-    this.scores = scores;
+  public Rank(final int rank, final int studentId, final float totalMarks) {
+    this.rank = rank;
+    this.studentId = studentId;
+    this.totalMarks = totalMarks;
   }
 
-  public int getId() {
-    return id;
+  public int getRank() {
+    return rank;
   }
 
-  public String getName() {
-    return name;
+  public int getStudentId() {
+    return studentId;
   }
 
-  public List<Score> getScores() {
-    return List.copyOf(scores);
+  public float getTotalMarks() {
+    return totalMarks;
   }
 
   @Override
   public String toString() {
-    return "Student{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", scores=" + scores +
+    return "Rank{" +
+        "rank=" + rank +
+        ", studentId=" + studentId +
+        ", totalMarks=" + totalMarks +
         '}';
   }
 }

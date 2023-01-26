@@ -15,13 +15,29 @@
  */
 package com.sms.studentmanager.model;
 
-public enum Subject {
+public class StudentScore {
 
-  MATH("Math"), ENGLISH("English"), ;
+  private final int studentId;
+  private final float totalScore;
 
-  private final String subject;
-
-  Subject(String subject) {
-    this.subject = subject;
+  public StudentScore(final int studentId, final float totalScore) {
+    this.studentId = studentId;
+    this.totalScore = totalScore;
   }
+
+  public int getStudentId() {
+    return studentId;
   }
+
+  public float getTotalScore() {
+    return totalScore;
+  }
+
+  @Override
+  public String toString() {
+    return "StudentScore{" +
+        "studentId=" + studentId +
+        ", totalScore=" + totalScore +
+        '}';
+  }
+}

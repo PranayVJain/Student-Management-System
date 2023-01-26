@@ -13,15 +13,16 @@
  * agreement/contract under which the program(s) have been supplied.
  * #L%
  */
-package com.sms.studentmanager.model;
+package com.sms.studentmanager.repository;
 
-public enum Subject {
+import com.sms.studentmanager.model.Rank;
+import org.springframework.stereotype.Repository;
 
-  MATH("Math"), ENGLISH("English"), ;
+@Repository
+public class InMemRankStorage implements RankRepository {
 
-  private final String subject;
+  @Override
+  public void saveRank(final Rank rank) {
 
-  Subject(String subject) {
-    this.subject = subject;
   }
-  }
+}

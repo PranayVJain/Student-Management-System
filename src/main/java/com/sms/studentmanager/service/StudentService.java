@@ -17,6 +17,7 @@ package com.sms.studentmanager.service;
 
 import com.sms.studentmanager.model.Student;
 import com.sms.studentmanager.repository.StudentRepository;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,9 @@ public class StudentService {
 
   public Student getStudent(final int studentId) {
     return studentRepository.getStudent(studentId);
+  }
+
+  public List<Student> getAllStudent() {
+    return studentRepository.getAllStudents();
   }
 }

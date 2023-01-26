@@ -13,15 +13,11 @@
  * agreement/contract under which the program(s) have been supplied.
  * #L%
  */
-package com.sms.studentmanager.model;
+package com.sms.studentmanager.repository;
 
-public enum Subject {
+import com.sms.studentmanager.model.Rank;
 
-  MATH("Math"), ENGLISH("English"), ;
+public interface RankRepository {
 
-  private final String subject;
-
-  Subject(String subject) {
-    this.subject = subject;
-  }
-  }
+  void saveRank(Rank rank);
+}

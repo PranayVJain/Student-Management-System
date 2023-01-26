@@ -4,3 +4,4 @@ Assumptions
 2. The subjects are pre-defined.
 3. In memory cache to store the data is used.
 4. Student names are unique
+5. Max marks that can be obtained from a subject = 50.

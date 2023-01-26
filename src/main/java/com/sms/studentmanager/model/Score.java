@@ -32,4 +32,12 @@ public class Score {
   public Subject getSubject() {
     return subject;
   }
+
+  @Override
+  public String toString() {
+    return "Score{" +
+        "marks=" + marks +
+        ", subject=" + subject +
+        '}';
+  }
 }

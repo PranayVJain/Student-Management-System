@@ -13,15 +13,9 @@
  * agreement/contract under which the program(s) have been supplied.
  * #L%
  */
-package com.sms.studentmanager.model;
+package com.sms.studentmanager.repository;
 
-public enum Subject {
+public interface ScoreRepository {
 
-  MATH("Math"), ENGLISH("English"), ;
-
-  private final String subject;
-
-  Subject(String subject) {
-    this.subject = subject;
-  }
-  }
+  void saveScore();
+}

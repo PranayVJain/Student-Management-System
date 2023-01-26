@@ -16,8 +16,8 @@
 package com.sms.studentmanager.controller;
 
 import com.sms.studentmanager.model.Student;
-import com.sms.studentmanager.repository.StudentRepository;
 import com.sms.studentmanager.service.StudentService;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +44,11 @@ public class StudentController {
   public ResponseEntity<Student> getStudent(@PathVariable("id") int studentId) {
     final Student student = studentService.getStudent(studentId);
     return ResponseEntity.ok(student);
+  }
+
+  @GetMapping(value = "/v1/students")
+  public ResponseEntity<List<Student>> getStudent() {
+    return ResponseEntity.ok(studentService.getAllStudent());
   }
 
 }

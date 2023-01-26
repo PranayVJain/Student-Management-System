@@ -17,6 +17,7 @@ package com.sms.studentmanager.repository;
 
 import com.sms.studentmanager.exception.StudentNotFoundException;
 import com.sms.studentmanager.model.Student;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class InMemStorage implements StudentRepository {
+public class InMemStudentStorage implements StudentRepository {
 
   private final Map<Integer, Student> inMemStore = new ConcurrentHashMap<>();
   private final AtomicInteger atomicInteger = new AtomicInteger();
@@ -45,7 +46,7 @@ public class InMemStorage implements StudentRepository {
 
   @Override
   public List<Student> getAllStudents() {
-    return (List<Student>) inMemStore.values();
+    return new ArrayList<>(inMemStore.values());
   }
 
   int getNextId() {
