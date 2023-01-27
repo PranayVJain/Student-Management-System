@@ -21,7 +21,6 @@ import com.sms.studentmanager.model.Student;
 import com.sms.studentmanager.repository.ScoreRepository;
 import com.sms.studentmanager.repository.StudentRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class StudentService {
   private final ScoreRepository scoreRepository;
 
   public StudentService(final StudentRepository studentRepository,
-      final SequenceKeyGenerator sequenceKeyGenerator,
+      final KeyGenerator sequenceKeyGenerator,
       final ScoreRepository scoreRepository) {
     this.studentRepository = studentRepository;
     this.sequenceKeyGenerator = sequenceKeyGenerator;
