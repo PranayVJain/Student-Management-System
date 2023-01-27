@@ -17,12 +17,13 @@ package com.sms.studentmanager;
 
 import static com.sms.studentmanager.ResponseBodyMatchers.responseBody;
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.sms.studentmanager.controller.StudentController;
+import com.sms.studentmanager.exception.StudentNotFoundException;
 import com.sms.studentmanager.model.Marks;
 import com.sms.studentmanager.model.Student;
 import com.sms.studentmanager.model.Subject;
@@ -64,6 +65,14 @@ public class StudentControllerIT {
     mockMvc.perform(get("/v1/students/1"))
         .andExpect(status().isOk())
         .andExpect(responseBody().containsObjectAsJson(expected, Student.class));
+  }
+
+  @Test
+  public void ifInvalidStudentIdInputThenGetStudentNotFound() throws Exception {
+    final int studentId = 1;
+    Mockito.when(studentService.getStudent(studentId)).thenThrow(new StudentNotFoundException("Student not found"));
+    mockMvc.perform(get("/v1/students/1"))
+        .andExpect(status().is(HttpStatus.NOT_FOUND.value()));
   }
 
   @Test

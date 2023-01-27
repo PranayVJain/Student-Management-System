@@ -17,9 +17,12 @@ package com.sms.studentmanager.model;
 
 public class Rank {
 
-  private final int rank;
-  private final int studentId;
-  private final float totalMarks;
+  private int rank;
+  private int studentId;
+  private float totalMarks;
+
+  public Rank() {
+  }
 
   public Rank(final int rank, final int studentId, final float totalMarks) {
     this.rank = rank;
