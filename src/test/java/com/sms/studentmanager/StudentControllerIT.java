@@ -16,6 +16,7 @@
 package com.sms.studentmanager;
 
 import static com.sms.studentmanager.ResponseBodyMatchers.responseBody;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -58,11 +59,21 @@ public class StudentControllerIT {
   @Test
   public void ifValidInputThenGetStudent() throws Exception {
     final int studentId = 1;
-    final Student expected = new Student(1, "TestStudent",List.of(new Marks(40, Subject.ENGLISH)));
+    final Student expected = new Student(1, "TestStudent", List.of(new Marks(40, Subject.ENGLISH)));
     Mockito.when(studentService.getStudent(studentId)).thenReturn(expected);
     mockMvc.perform(get("/v1/students/1"))
         .andExpect(status().isOk())
         .andExpect(responseBody().containsObjectAsJson(expected, Student.class));
+  }
+
+  @Test
+  public void ifValidInputThenGetStudents() throws Exception {
+    final Student student1 = new Student(1, "TestStudent", List.of(new Marks(40, Subject.ENGLISH)));
+    final Student student2 = new Student(2, "TestStudent", List.of(new Marks(40, Subject.ENGLISH)));
+    Mockito.when(studentService.getAllStudent()).thenReturn(List.of(student1, student2));
+    mockMvc.perform(get("/v1/students"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$", hasSize(2)));
   }
 
   @Test
