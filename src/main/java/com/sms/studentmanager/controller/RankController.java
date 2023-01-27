@@ -22,10 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/v1/ranks")
 public class RankController {
 
   private final RankingService rankingService;
@@ -34,18 +36,18 @@ public class RankController {
     this.rankingService = rankingService;
   }
 
-  @PostMapping("/v1/ranks/students")
+  @PostMapping("/students")
   public ResponseEntity calculateRank() {
     rankingService.calculateRank();
     return ResponseEntity.ok().build();
   }
 
-  @GetMapping("/v1/ranks/students/{id}")
+  @GetMapping("/students/{id}")
   public ResponseEntity<Rank> getRank(@PathVariable("id") int studentId) {
     return ResponseEntity.ok(rankingService.getRank(studentId));
   }
 
-  @GetMapping("/v1/ranks/students")
+  @GetMapping("/students")
   public ResponseEntity<List<Rank>> getRankFromRange(@RequestParam("from") int from, @RequestParam("to") int to) {
     return ResponseEntity.ok(rankingService.getRanks(from, to));
   }

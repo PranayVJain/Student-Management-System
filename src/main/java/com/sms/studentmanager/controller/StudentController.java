@@ -18,14 +18,17 @@ package com.sms.studentmanager.controller;
 import com.sms.studentmanager.model.Student;
 import com.sms.studentmanager.service.StudentService;
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/v1/students")
 public class StudentController {
 
   private final StudentService studentService;
@@ -34,19 +37,19 @@ public class StudentController {
     this.studentService = studentService;
   }
 
-  @PostMapping(value = "/v1/students", consumes = "application/json")
-  public ResponseEntity addStudent(@RequestBody Student student) {
+  @PostMapping
+  public ResponseEntity<Student> addStudent(@RequestBody Student student) {
     final int studentId = studentService.saveStudent(student);
-    return ResponseEntity.ok(studentId);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @GetMapping(value = "/v1/students/{id}")
+  @GetMapping(value = "/{id}")
   public ResponseEntity<Student> getStudent(@PathVariable("id") int studentId) {
     final Student student = studentService.getStudent(studentId);
     return ResponseEntity.ok(student);
   }
 
-  @GetMapping(value = "/v1/students")
+  @GetMapping
   public ResponseEntity<List<Student>> getStudent() {
     return ResponseEntity.ok(studentService.getAllStudent());
   }

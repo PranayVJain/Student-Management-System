@@ -19,9 +19,13 @@ import java.util.List;
 
 public class Student {
 
-  private final int id;
-  private final String name;
-  private final List<Marks> marks;
+  private int id;
+  private String name;
+  private List<Marks> marks;
+
+  public Student() {
+    // Default contructor for deserialization
+  }
 
   public Student(final int id, final String name, final List<Marks> marks) {
     this.id = id;
