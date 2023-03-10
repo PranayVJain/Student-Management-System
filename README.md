@@ -1,4 +1,5 @@
 # StudentManagementSystem
+Project to demonstrate REST API built using Spring Boot.
 
 ## Requirement
 1. Admin should be able to insert records containing student info.
