@@ -1,18 +1,4 @@
-/*
- * #%L
- * studentmanager
- *
- * %%
- * Copyright (C) 2018 - 2022 Nuance Communications Inc. All Rights Reserved.
- * %%
- *
- * The copyright to the computer program(s) herein is the property of
- * Nuance Communications Inc. The program(s) may be used and/or copied
- * only with the written permission from Nuance Communications Inc.
- * or in accordance with the terms and conditions stipulated in the
- * agreement/contract under which the program(s) have been supplied.
- * #L%
- */
+
 package com.sms.studentmanager.controller;
 
 import com.sms.studentmanager.model.Student;
@@ -21,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,17 +32,17 @@ public class StudentController {
     LOGGER.info("Received request to add student <{}>", student);
     final int studentId = studentService.saveStudent(student);
     LOGGER.info("Student added with id <{}>", studentId);
-    return ResponseEntity.status(HttpStatus.CREATED).build();
+    return ResponseEntity.status(HttpStatus.CREATED).body(new Student(studentId, student.getName(), student.getMarks()));
   }
 
   @GetMapping(value = "/{id}")
-  public ResponseEntity<Student> getStudent(@PathVariable("id") int studentId) {
+  public ResponseEntity<String> getStudent(@PathVariable("id") int studentId) {
     LOGGER.info("Received request to get student with id <{}>", studentId);
     final Student student = studentService.getStudent(studentId);
-    return ResponseEntity.ok(student);
+    return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
   }
 
-  @GetMapping
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<Student>> getStudent() {
     LOGGER.info("Received request to get all students");
     return ResponseEntity.ok(studentService.getAllStudent());
